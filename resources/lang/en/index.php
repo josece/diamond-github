@@ -17,7 +17,7 @@ return [
     'username' => 'Username',
     'username.placeholder' => 'Type a github username',
 
-    'followers' => 'Followers',
+    'followers' => 'Follower|Followers',
     'search' => 'Search',
 
 ];

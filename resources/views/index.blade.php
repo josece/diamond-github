@@ -13,7 +13,13 @@
     <link href="{{asset('css/app.css')}}" type="text/css" rel="stylesheet">
     <!-- Styles -->
     <style>
+.followers {
+    list-style: none;
+}
 
+.followers .avatar {
+    width: 70px;
+}
 </style>
 </head>
 <body>
@@ -32,4 +38,9 @@
 </div>
 
 </body>
+<script
+  src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+  integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+  crossorigin="anonymous"></script>
+  @yield('scripts')
 </html>

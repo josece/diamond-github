@@ -15,6 +15,10 @@ Route::get('/', array(
 	'as' => 'followers.list', 
 	'uses' => 'followersController@showFollowers'));
  
-Route::get('/{username}', array(
+Route::post('/{username}', array(
 	'as' => 'followers.show', 
+	'uses' => 'followersController@showFollowers'));
+
+Route::get('/{username}', array(
+	'as' => 'followers.show2', 
 	'uses' => 'followersController@showFollowers'));

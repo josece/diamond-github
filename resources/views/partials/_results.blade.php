@@ -2,12 +2,14 @@
  <!-- Results -->
  <div class="row">
     <div class="col-xs-12 col-md-6">
-        <h3>{{ __('index.followers')}} </h3>
-        <ul>
-            <li>
-                <img src="" alt="" />
-            </li>
+        <h3>{{count($followers)}} {{ trans_choice('index.followers', count($followers))}} </h3>
+        <ul class="followers">
+            
+        @foreach($followers as $follower)
+        <li><img class="avatar" src="{{$follower['avatar_url']}}" /> <span class="name">{{$follower['login']}}</span></li>
+        @endforeach
         </ul>
+
     </div>
 </div>
 @endunless
