@@ -11,6 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', array(
+	'as' => 'followers.list', 
+	'uses' => 'followersController@showFollowers'));
+ 
+Route::get('/{username}', array(
+	'as' => 'followers.show', 
+	'uses' => 'followersController@showFollowers'));
