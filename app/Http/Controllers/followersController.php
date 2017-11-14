@@ -17,9 +17,13 @@ class followersController extends Controller
 	public function showFollowers($username = null){
 		$followers = '';
 		if(!empty($username)){
-			$followers = GitHub::user()->followers($username);
+
+			try{
+				$followers = GitHub::user()->followers($username);
+			}catch(\Exception $e){
+				$followers = '';
+			}
 		}
-		// return $followers;
-		return view('index')->withUsername($username)->withFollowers($followers);
+		return $followers;
 	}
 }	

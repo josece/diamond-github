@@ -13,11 +13,11 @@
     <link href="{{asset('css/app.css')}}" type="text/css" rel="stylesheet">
     <!-- Styles -->
     <style>
-.followers {
+#followers {
     list-style: none;
 }
 
-.followers .avatar {
+#followers .avatar {
     width: 70px;
 }
 </style>
@@ -30,7 +30,8 @@
 
             
            @include('partials._form')
-           @include('partials._results')
+
+           
         </div>
 
 
@@ -39,8 +40,7 @@
 
 </body>
 <script
-  src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-  integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+  src="https://code.jquery.com/jquery-3.2.1.min.js" 
   crossorigin="anonymous"></script>
   @yield('scripts')
 </html>
