@@ -29,6 +29,7 @@
         margin-top: 20px;
     }
 
+ 
 </style>
 </head>
 <body>
@@ -36,7 +37,7 @@
       <div class="row content">
         <div class="col-sm-8 text-left"> 
             <h1>{{ __('index.title')}}</h1>
-            
+
             @include('partials._form')
         </div>
     </div>

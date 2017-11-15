@@ -46,12 +46,12 @@ class Github extends Model
 			'Accept'        => 'application/json',
 		];
 
-
-		$response = $client->get("$username/followers?page=$page", array('headers'=> $headers));
-		if($response->getStatusCode() == 404)
+		try{
+			$response = $client->get("$username/followers?page=$page", array('headers'=> $headers));
+		}catch(\Exception $e){
 			return "[]";
-		else
-			return $response;
+		}
+		return $response;
 	}
 
 }
