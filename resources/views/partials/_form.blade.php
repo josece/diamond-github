@@ -7,47 +7,59 @@
             <input type="text" name="username" class="form-control" placeholder="{{__('index.username.placeholder')}}" id="username">
         </div>
         <br />
-        <button class="btn" type="submit" value="{{ __('index.search')}}">{{ __('index.search')}}</button>
+        <button type="submit" class="btn">{{__('index.search')}}</button>
     </div>
 </form>
-<div class="row">
+<div class="row" >
     <div class="col-xs-12 col-md-6">
         <ul  id="followers">
+        </ul>
+        <a href="#followers" class="load-more" id="page" title="1">Next page</div>
+        </div>
+    </div>
+    @section('scripts')
 
-</ul></div></div>
-@section('scripts')
-
-<script>
-    $('#search').submit(function(event){
-
-        event.preventDefault();
-        event.stopPropagation();
+    <script>
+        $('#search').submit(function(event){
+            event.preventDefault();
+            event.stopPropagation();
         clean();
-        getFollowers($('#username').val());
-
+        getFollowers($('#username').val(), 1);
     })
 
-    function clean(){
-        $('#followers').html('');
+        function clean()
+    {
+        $('#followers').html(''); //clean
     }
 
-    function getFollowers(username){
-       $.ajax({
+
+        function getFollowers(username, page){
+         $.ajax({
           type: 'GET',
-          url: "{{route('followers.getWithParameter', '')}}/"+username,
+          url: "{{route('followers.usernamePage')}}/"+username+"/"+page,
           dataType: 'json' ,
           success: function(result){
 
             $.each(result, function(k, v){
-                $('#followers').append('<li><img class="avatar" src="'+v.avatar_url+'" /><span class="name">'+v.login+'</span></li>');
+                $('#followers').append('<li><img class="avatar" src="'+v.avatar_url+'" /></li>');
             });
-       
-   },
-   fail:function(result){
-    //
-}});
-}
+            if(result.length<30){
+                $('#page').hide();    
+            }else{
+               $('#page').show();
+            }
 
+        },
+        fail:function(result){
 
+        }
+    });
+     }
+     $('.load-more').click(function(){
+        clean();
+       nextPage = parseInt($('#page').attr('title')) +1 ;
+       getFollowers($('#username').val(), nextPage);
+       $('#page').attr('title', nextPage);
+   });
 </script>
 @endsection

@@ -13,13 +13,22 @@
     <link href="{{asset('css/app.css')}}" type="text/css" rel="stylesheet">
     <!-- Styles -->
     <style>
-#followers {
-    list-style: none;
-}
+    #followers {
+        list-style: none;
+    }
+    #followers li{
+        width:25%;
+        float: left;
+    }
+    #followers .avatar {
+        width: 70px;
+    }
+    a#page {
+        font-size: 30px;
+        display: none;
+        margin-top: 20px;
+    }
 
-#followers .avatar {
-    width: 70px;
-}
 </style>
 </head>
 <body>
@@ -27,20 +36,15 @@
       <div class="row content">
         <div class="col-sm-8 text-left"> 
             <h1>{{ __('index.title')}}</h1>
-
             
-           @include('partials._form')
-
-           
+            @include('partials._form')
         </div>
-
-
     </div>
 </div>
 
 </body>
 <script
-  src="https://code.jquery.com/jquery-3.2.1.min.js" 
-  crossorigin="anonymous"></script>
-  @yield('scripts')
+src="https://code.jquery.com/jquery-3.2.1.min.js" 
+crossorigin="anonymous"></script>
+@yield('scripts')
 </html>
