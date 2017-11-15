@@ -16,11 +16,7 @@ class followersController extends Controller
 	 */
 	public function showFollowers($username = null, $page = 1){
 		$github = new Github;
-		// $user = $github->user($username);
 		$followers = $github->followers($username, $page);
-
-		// $total = $user->followers;
-		
 		return $followers;
 	}
 

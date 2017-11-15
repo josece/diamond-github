@@ -1,6 +1,7 @@
 <!-- Form -->
 <form method="post" action="" id="search">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
+    <input type="hidden" name="currentUser" id="currentUser">
     <div class="form-group row">
         <div class="col-xs-8 col-md-6">
             <label for="username">{{ __('index.username')}}</label>
@@ -24,7 +25,8 @@
             event.preventDefault();
             event.stopPropagation();
         clean();
-        getFollowers($('#username').val(), 1);
+        $('#currentUser').val($('#username').val())
+        getFollowers($('#currentUser').val(), 1);
     })
 
         function clean()
@@ -58,7 +60,7 @@
      $('.load-more').click(function(){
         clean();
        nextPage = parseInt($('#page').attr('title')) +1 ;
-       getFollowers($('#username').val(), nextPage);
+       getFollowers($('#currentUser').val(), nextPage);
        $('#page').attr('title', nextPage);
    });
 </script>
