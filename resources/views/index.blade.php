@@ -28,6 +28,9 @@
         display: none;
         margin-top: 20px;
     }
+    #count{
+        display: none;
+    }
 
  
 </style>

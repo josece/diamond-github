@@ -13,55 +13,75 @@
 </form>
 <div class="row" >
     <div class="col-xs-12 col-md-6">
+        <h4 id="count"></h4>
         <ul  id="followers">
         </ul>
-        <a href="#followers" class="load-more" id="page" title="1">Next page</div>
-        </div>
+        <a href="#followers" class="load-more" id="page" title="1">Next page</a></div>
     </div>
-    @section('scripts')
+</div>
+@section('scripts')
 
-    <script>
-        $('#search').submit(function(event){
-            event.preventDefault();
-            event.stopPropagation();
+<script>
+    var count = 0;
+    $('#search').submit(function(event) {
+        event.preventDefault();
+        event.stopPropagation();
         clean();
-        $('#currentUser').val($('#username').val())
-        getFollowers($('#currentUser').val(), 1);
+        var username = $('#username').val()
+        $('#currentUser').val(username);
+        getUser(username);
+        getFollowers(username, 1);
+        
+
     })
 
-        function clean()
-    {
+    function clean() {
         $('#followers').html(''); //clean
     }
-
-
-        function getFollowers(username, page){
-         $.ajax({
-          type: 'GET',
-          url: "{{route('followers.usernamePage')}}/"+username+"/"+page,
-          dataType: 'json' ,
-          success: function(result){
-
-            $.each(result, function(k, v){
-                $('#followers').append('<li><img class="avatar" src="'+v.avatar_url+'" /></li>');
-            });
-            if(result.length<30){
-                $('#page').hide();    
-            }else{
-               $('#page').show();
-            }
-
+    function getUser(username) {
+        $.ajax({
+      type: 'GET',
+      url: "{{route('followers.user')}}/"+username,
+      dataType: 'json' ,
+      success: function(result){
+        count = result.followers;
+        $('#count').html(count + " Followers").show();
         },
-        fail:function(result){
+       fail:function(result){
 
-        }
+       }
     });
-     }
-     $('.load-more').click(function(){
-        clean();
-       nextPage = parseInt($('#page').attr('title')) +1 ;
-       getFollowers($('#currentUser').val(), nextPage);
-       $('#page').attr('title', nextPage);
-   });
+    }
+
+    function getFollowers(username, page) {
+     $.ajax({
+      type: 'GET',
+      url: "{{route('followers.usernamePage')}}/"+username+"/"+page,
+      dataType: 'json' ,
+      success: function(result){
+
+        $.each(result, function(k, v){
+            $('#followers').append('<li><img class="avatar" src="'+v.avatar_url+'" /></li>');
+        });
+
+        if(page*30 > count){
+            $('#page').hide();    
+        }else{
+           $('#page').show();
+       }
+
+   },
+   fail:function(result){
+
+   }
+});
+ }
+
+ $('.load-more').click(function(){
+    clean();
+    nextPage = parseInt($('#page').attr('title')) +1 ;
+    getFollowers($('#currentUser').val(), nextPage);
+    $('#page').attr('title', nextPage);
+});
 </script>
 @endsection

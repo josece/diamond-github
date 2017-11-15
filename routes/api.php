@@ -21,3 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('followers/{username?}/{page?}', array(
 	'as' => 'followers.usernamePage', 
 	'uses' => 'followersController@showFollowers'));
+
+Route::get('user/{username?}', array(
+	'as' => 'followers.user', 
+	'uses' => 'followersController@userData'));

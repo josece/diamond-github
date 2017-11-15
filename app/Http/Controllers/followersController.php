@@ -20,5 +20,12 @@ class followersController extends Controller
 		return $followers;
 	}
 
+	public function userData($username = null)
+	{
+		$github = new Github;
+		$user = $github->user($username);
+		return $user;
+	}
+
 
 }	
